@@ -1,7 +1,7 @@
 ﻿<?php  
 /**  
 	*  本文作者：chinesehero@163.com
-    *  获取一个汉字的拼音  
+	*  获取一个汉字的拼音  
 	*  用法如下：
 	*  include('Pinyin.php');
 	*  echo getPinyin("你好，吃了吗？");

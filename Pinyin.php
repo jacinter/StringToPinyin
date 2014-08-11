@@ -1,12 +1,12 @@
 ﻿<?php  
 /**  
-*  作者：chinesehero@163.com
-*  获取一个汉字的拼音  
-*  用法如下：
-*  require_once('Pinyin.php');
-*  echo getPinyin("你好，吃了吗？"); // nihao，chilema？
-*/
-	  
+	*  本文作者：chinesehero@163.com
+	*  获取一个汉字的拼音  
+	*  用法如下：
+	*  include('Pinyin.php');
+	*  echo getPinyin("你好，吃了吗？");
+    */
+      
 function  getPinyin($keyWord){  
 	static $hz;
 	if(!isset($hz)){
@@ -3687,17 +3687,17 @@ function  getPinyin($keyWord){
 		$hz['就']="jiu";
 		$hz['舅']="jiu";
 		$hz['鹫']="jiu";
-		$hz['军']="jiu";
-		$hz['均']="jiu";
-		$hz['君']="jiu";
-		$hz['钧']="jiu";
-		$hz['菌']="jiu";
-		$hz['皲']="jiu";
-		$hz['俊']="jiu";
-		$hz['郡']="jiu";
-		$hz['峻']="jiu";
-		$hz['骏']="jiu";
-		$hz['竣']="jiu";
+		$hz['军']="jun";
+		$hz['均']="jun";
+		$hz['君']="jun";
+		$hz['钧']="jun";
+		$hz['菌']="jun";
+		$hz['皲']="jun";
+		$hz['俊']="jun";
+		$hz['郡']="jun";
+		$hz['峻']="jun";
+		$hz['骏']="jun";
+		$hz['竣']="jun";
 		$hz['拘']="ju";
 		$hz['狙']="ju";
 		$hz['居']="ju";
@@ -6948,39 +6948,39 @@ function  getPinyin($keyWord){
 	}
 	
 	$result = '';
-	$charArray = str_split_php5_utf8($keyWord);
+	$charArray=str_split_php5_utf8($keyWord);
 	foreach($charArray as $char){
-		if(isset($hz[$char])){
-			$result = $result.$hz[$char];
+		if(!empty($hz[$char])){
+			$result= $result.$hz[$char];
 		}else{
-			$result = $result.$char;
+			$result= $result.$char;
 		}
 	}
 	return $result;
 }
 	
 function str_split_php5_utf8($str) { 
-	// place each character of the string into and array 
-	$split = 1; 
-	$array = array(); 
-	for ( $i=0; $i < strlen( $str ); ){ 
-		$value = ord($str[$i]); 
-		if($value > 127){ 
-			if($value >= 192 && $value <= 223) 
-				$split=2; 
-			elseif($value >= 224 && $value <= 239) 
-				$split=3; 
-			elseif($value >= 240 && $value <= 247) 
-				$split=4; 
-		}else{ 
-			$split=1; 
-		}
-		$key = NULL; 
-		for ( $j = 0; $j < $split; $j++, $i++ ) { 
-			$key .= $str[$i]; 
-		}
-		array_push( $array, $key ); 
-	} 
-	return $array; 
+    // place each character of the string into and array 
+    $split=1; 
+    $array = array(); 
+    for ( $i=0; $i < strlen( $str ); ){ 
+        $value = ord($str[$i]); 
+        if($value > 127){ 
+            if($value >= 192 && $value <= 223) 
+                $split=2; 
+            elseif($value >= 224 && $value <= 239) 
+                $split=3; 
+            elseif($value >= 240 && $value <= 247) 
+                $split=4; 
+        }else{ 
+            $split=1; 
+        } 
+            $key = NULL; 
+        for ( $j = 0; $j < $split; $j++, $i++ ) { 
+            $key .= $str[$i]; 
+        } 
+        array_push( $array, $key ); 
+    } 
+    return $array; 
 }
 ?>

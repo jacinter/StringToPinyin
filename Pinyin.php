@@ -1,14 +1,15 @@
 ﻿<?php  
 /**  
-	*  本文作者：chinesehero@163.com
-	*  获取一个汉字的拼音  
-	*  用法如下：
-	*  include('Pinyin.php');
-	*  echo getPinyin("你好，吃了吗？");
-    */
-      
-    function  getPinyin($keyWord)  
-    {  
+*  作者：chinesehero@163.com
+*  获取一个汉字的拼音  
+*  用法如下：
+*  require_once('Pinyin.php');
+*  echo getPinyin("你好，吃了吗？"); // nihao，chilema？
+*/
+	  
+function  getPinyin($keyWord){  
+	static $hz;
+	if(!isset($hz)){
 		$hz['腌']="yan";
 		$hz['嗄']="a";
 		$hz['迫']="po";
@@ -6944,45 +6945,42 @@
 		$hz['螗']="tang";
 		$hz['螵']="piao";
 		$hz['蟛']="peng";
-
-		
-		$result="";
-		$charArray=str_split_php5_utf8($keyWord);
-		foreach($charArray as $char){
-		if(!empty($hz[$char])){
-			$result= $result.$hz[$char];
-		}
-		else
-		{
-			$result= $result.$char;
-		}
-		}
-		return $result;
 	}
 	
-	function str_split_php5_utf8($str) { 
-    // place each character of the string into and array 
-    $split=1; 
-    $array = array(); 
-    for ( $i=0; $i < strlen( $str ); ){ 
-        $value = ord($str[$i]); 
-        if($value > 127){ 
-            if($value >= 192 && $value <= 223) 
-                $split=2; 
-            elseif($value >= 224 && $value <= 239) 
-                $split=3; 
-            elseif($value >= 240 && $value <= 247) 
-                $split=4; 
-        }else{ 
-            $split=1; 
-        } 
-            $key = NULL; 
-        for ( $j = 0; $j < $split; $j++, $i++ ) { 
-            $key .= $str[$i]; 
-        } 
-        array_push( $array, $key ); 
-    } 
-    return $array; 
+	$result = '';
+	$charArray = str_split_php5_utf8($keyWord);
+	foreach($charArray as $char){
+		if(isset($hz[$char])){
+			$result = $result.$hz[$char];
+		}else{
+			$result = $result.$char;
+		}
 	}
-   
+	return $result;
+}
+	
+function str_split_php5_utf8($str) { 
+	// place each character of the string into and array 
+	$split = 1; 
+	$array = array(); 
+	for ( $i=0; $i < strlen( $str ); ){ 
+		$value = ord($str[$i]); 
+		if($value > 127){ 
+			if($value >= 192 && $value <= 223) 
+				$split=2; 
+			elseif($value >= 224 && $value <= 239) 
+				$split=3; 
+			elseif($value >= 240 && $value <= 247) 
+				$split=4; 
+		}else{ 
+			$split=1; 
+		}
+		$key = NULL; 
+		for ( $j = 0; $j < $split; $j++, $i++ ) { 
+			$key .= $str[$i]; 
+		}
+		array_push( $array, $key ); 
+	} 
+	return $array; 
+}
 ?>

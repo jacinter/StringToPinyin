@@ -7,8 +7,9 @@
 	*  echo getPinyin("你好，吃了吗？");
     */
       
-    function  getPinyin($keyWord)  
-    {  
+function  getPinyin($keyWord){  
+	static $hz;
+	if(!isset($hz)){
 		$hz['腌']="yan";
 		$hz['嗄']="a";
 		$hz['迫']="po";
@@ -3686,17 +3687,17 @@
 		$hz['就']="jiu";
 		$hz['舅']="jiu";
 		$hz['鹫']="jiu";
-		$hz['军']="jiu";
-		$hz['均']="jiu";
-		$hz['君']="jiu";
-		$hz['钧']="jiu";
-		$hz['菌']="jiu";
-		$hz['皲']="jiu";
-		$hz['俊']="jiu";
-		$hz['郡']="jiu";
-		$hz['峻']="jiu";
-		$hz['骏']="jiu";
-		$hz['竣']="jiu";
+		$hz['军']="jun";
+		$hz['均']="jun";
+		$hz['君']="jun";
+		$hz['钧']="jun";
+		$hz['菌']="jun";
+		$hz['皲']="jun";
+		$hz['俊']="jun";
+		$hz['郡']="jun";
+		$hz['峻']="jun";
+		$hz['骏']="jun";
+		$hz['竣']="jun";
 		$hz['拘']="ju";
 		$hz['狙']="ju";
 		$hz['居']="ju";
@@ -6944,23 +6945,21 @@
 		$hz['螗']="tang";
 		$hz['螵']="piao";
 		$hz['蟛']="peng";
-
-		
-		$result="";
-		$charArray=str_split_php5_utf8($keyWord);
-		foreach($charArray as $char){
-		if(!empty($hz[$char])){
-			$result= $result.$hz[$char];
-		}
-		else
-		{
-			$result= $result.$char;
-		}
-		}
-		return $result;
 	}
 	
-	function str_split_php5_utf8($str) { 
+	$result = '';
+	$charArray=str_split_php5_utf8($keyWord);
+	foreach($charArray as $char){
+		if(!empty($hz[$char])){
+			$result= $result.$hz[$char];
+		}else{
+			$result= $result.$char;
+		}
+	}
+	return $result;
+}
+	
+function str_split_php5_utf8($str) { 
     // place each character of the string into and array 
     $split=1; 
     $array = array(); 
@@ -6983,6 +6982,5 @@
         array_push( $array, $key ); 
     } 
     return $array; 
-	}
-   
+}
 ?>
